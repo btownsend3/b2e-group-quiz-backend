@@ -27,18 +27,18 @@ public class QuizController {
 
     @PostMapping("/create")
     public void createQuiz(@RequestParam UUID token, @RequestBody Quiz quiz) {
-        if (!this.quizService.checkAuth(token, "admin")) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You are not authorized to create quizzes");
-        } else {
+//        if (!this.quizService.checkAuth(token, "admin")) {
+//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You are not authorized to create quizzes");
+//        } else {
+//        }
             this.quizService.createQuiz(quiz);
-        }
     }
 
     @PostMapping("/edit")
     public void editQuizList(@RequestParam UUID token, @RequestBody Quiz quiz) {
-        if (this.quizService.checkAuth(token, "admin")) {
+//        if (this.quizService.checkAuth(token, "admin")) {
+//        } else throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "only admin can edit quizzes");
             this.quizService.editQuiz(quiz);
-        } else throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "only admin can edit quizzes");
 
     }
 
