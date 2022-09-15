@@ -17,11 +17,12 @@ public class QuizController {
     private final QuizService quizService;
 
     @Autowired
-    public QuizController(@NonNull QuizService quizService){
+    public QuizController(@NonNull QuizService quizService) {
         this.quizService = quizService;
     }
-@GetMapping("/test")
-    public String hello(){
+
+    @GetMapping("/test")
+    public String hello() {
         return "Testing";
     }
 
