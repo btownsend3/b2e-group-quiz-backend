@@ -51,7 +51,10 @@ public class QuizService {
 
     public void delete(Long id) {
         Optional<Quiz> quiz = this.repo.findById(id);
-        if (quiz.isEmpty())
+        if (quiz.isEmpty()){
             throw new ResponseStatusException(HttpStatus.GONE);
+        } else {
+            this.repo.deleteById(id);
+        }
     }
 }
