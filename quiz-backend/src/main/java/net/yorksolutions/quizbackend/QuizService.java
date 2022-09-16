@@ -51,10 +51,20 @@ public class QuizService {
 
     public void delete(Long id) {
         Optional<Quiz> quiz = this.repo.findById(id);
-        if (quiz.isEmpty()){
+        if (quiz.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.GONE);
         } else {
             this.repo.deleteById(id);
+        }
+    }
+
+    public void addResponse(Long id, Response response) {
+        Optional<Quiz> quiz = this.repo.findById(id);
+        if (quiz.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.GONE);
+        } else {
+            quiz.get().responses.add(response);
+            repo.save(quiz.get());
         }
     }
 }
