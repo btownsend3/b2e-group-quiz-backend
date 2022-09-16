@@ -20,7 +20,7 @@ public class Quiz {
     @ElementCollection
     List<HashMap> questions;
     @JsonProperty
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     List<Response> responses;
 
 }
