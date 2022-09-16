@@ -52,6 +52,9 @@ public class QuizController {
     public Iterable<Quiz> get() {
         return this.quizService.getQuizList();
     }
-
+    @PostMapping("/add-response")
+    public void addResponse(@RequestParam Long id, @RequestBody Response response){
+        this.quizService.addResponse(id, response);
+    }
 
 }
