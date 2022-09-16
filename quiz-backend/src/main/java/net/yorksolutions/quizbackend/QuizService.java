@@ -16,11 +16,13 @@ import java.util.UUID;
 @Service
 public class QuizService {
     private final QuizRepo repo;
+    private final ResponseRepo responseRepo;
     private final RestTemplate restTemplate;
 
     @Autowired
-    public QuizService(@NonNull QuizRepo repo) {
+    public QuizService(@NonNull QuizRepo repo, @NonNull ResponseRepo responseRepo) {
         this.repo = repo;
+        this.responseRepo = responseRepo;
         this.restTemplate = new RestTemplate();
     }
 
@@ -65,6 +67,16 @@ public class QuizService {
         } else {
             quiz.get().responses.add(response);
             repo.save(quiz.get());
+        }
+    }
+
+    public void grade(Long id, Float grade) {
+        Optional<Response> res = this.responseRepo.findById(id);
+        if (res.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        } else {
+            res.get().grade = grade;
+            this.responseRepo.save(res.get());
         }
     }
 }
